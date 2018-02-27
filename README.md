@@ -1,20 +1,20 @@
-# Project 4 - *Name of App Here*
+# Project 4 - *Instagram*
 
-**Name of your app** is a photo sharing app using Parse as its backend.
+**Instagram** is a photo sharing app using Parse as its backend.
 
-Time spent: **X** hours spent in total
+Time spent: **10** hours spent in total
 
 ## User Stories
 
 The following **required** functionality is completed:
 
-- [ ] User can sign up to create a new account using Parse authentication (+1pt)
-- [ ] User can log in and log out of his or her account (+1pt)
-- [ ] The current signed in user is persisted across app restarts (+1pt)
-- [ ] User can take a photo, add a caption, and post it to "Instagram" (+2pt)
-- [ ] User can view the last 20 posts submitted to "Instagram" (+2pt)
-- [ ] User can pull to refresh the last 20 posts submitted to "Instagram" (+1pt)
-- [ ] User can tap a post to view post details, including timestamp and caption (+2pt)
+- [X] User can sign up to create a new account using Parse authentication (+1pt)
+- [X] User can log in and log out of his or her account (+1pt)
+- [X] The current signed in user is persisted across app restarts (+1pt)
+- [X] User can take a photo, add a caption, and post it to "Instagram" (+2pt)
+- [X] User can view the last 20 posts submitted to "Instagram" (+2pt)
+- [X] User can pull to refresh the last 20 posts submitted to "Instagram" (+1pt)
+- [X] User can tap a post to view post details, including timestamp and caption (+2pt)
 
 The following **stretch** features are implemented:
 
