@@ -13,7 +13,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="instagram" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="BYZ-38-t0r" customClass="LoginViewController" customModule="instagram" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -55,27 +55,91 @@
                     <connections>
                         <outlet property="passwordField" destination="24O-fG-7FW" id="5pf-eu-KA7"/>
                         <outlet property="usernameField" destination="kCv-U5-Cro" id="fx4-gS-ZZe"/>
-                        <segue destination="T5Y-BZ-8wS" kind="presentation" identifier="loginSegue" id="exx-dm-y6Y"/>
+                        <segue destination="0j1-uf-gBG" kind="presentation" identifier="loginSegue" id="exx-dm-y6Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
         </scene>
-        <!--View Controller-->
+        <!--Instagram-->
         <scene sceneID="40X-tb-8e4">
             <objects>
-                <viewController id="T5Y-BZ-8wS" sceneMemberID="viewController">
+                <viewController id="T5Y-BZ-8wS" customClass="FeedViewController" customModule="instagram" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="maf-ps-BM2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qNn-6o-dVX">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostCell" rowHeight="342" id="8yH-X4-LIk" customClass="PostCell" customModule="instagram" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="342"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8yH-X4-LIk" id="Yhr-6l-Yvf">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="341.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t5s-64-gED">
+                                                    <rect key="frame" x="40" y="56" width="295" height="205"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qNn-6o-dVX" firstAttribute="leading" secondItem="2Lz-qR-SzI" secondAttribute="leading" id="4ad-fG-0j5"/>
+                            <constraint firstItem="qNn-6o-dVX" firstAttribute="top" secondItem="2Lz-qR-SzI" secondAttribute="top" id="9sU-rv-vcm"/>
+                            <constraint firstItem="qNn-6o-dVX" firstAttribute="bottom" secondItem="2Lz-qR-SzI" secondAttribute="bottom" id="jID-nr-7tx"/>
+                            <constraint firstItem="qNn-6o-dVX" firstAttribute="trailing" secondItem="2Lz-qR-SzI" secondAttribute="trailing" id="ykH-qc-5I0"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="2Lz-qR-SzI"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Instagram" id="t1E-qo-JzK">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="BcM-1E-HO7">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="XyG-AZ-6cB">
+                                <rect key="frame" x="16" y="7" width="48" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="onLogOut:" destination="T5Y-BZ-8wS" eventType="touchUpInside" id="RKS-ZA-Ho0"/>
+                                </connections>
+                            </button>
+                            <connections>
+                                <action selector="onLogOut:" destination="T5Y-BZ-8wS" id="RAD-W6-Mqm"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="qNn-6o-dVX" id="xr8-ZQ-h57"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ayS-52-I8f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="964" y="136"/>
+            <point key="canvasLocation" x="1672.8" y="134.48275862068968"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="3Wf-3R-eAr">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0j1-uf-gBG" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3aI-vo-aQn">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="T5Y-BZ-8wS" kind="relationship" relationship="rootViewController" id="aDn-An-qGR"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WwH-ca-hKe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="963.20000000000005" y="135.832083958021"/>
         </scene>
     </scenes>
 </document>
