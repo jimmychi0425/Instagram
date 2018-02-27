@@ -13,11 +13,29 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var posts: [PFObject] = []
     @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 200
         // Do any additional setup after loading the view.
+        fetchData()
+        
+        // Initialize a UIRefreshControl
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
+        // add refresh control to table view
+        tableView.insertSubview(refreshControl, at: 0)
+    }
+    
+    @objc func refreshControlAction(_ refreshControl: UIRefreshControl) {
+        fetchData()
+        // Reload the tableView now that there is new data
+        tableView.reloadData()
+        // Tell the refreshControl to stop spinning
+        refreshControl.endRefreshing()
     }
 
     @IBAction func onLogOut(_ sender: Any) {
@@ -29,8 +47,50 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! PostCell
+        let post = posts[indexPath.row]
+        let caption = post["caption"] as! String
+        cell.captionTextLabel.text = caption
+        let picture = post["media"] as! PFFile
+        picture.getDataInBackground { (imageData, error) in
+            if error == nil {
+                let image = UIImage(data: imageData!)
+                cell.PostImageView.image = image
+            } else {
+                print(error?.localizedDescription ?? "Error instance was nil")
+            }
+        }
         return cell
+    }
+    
+    func fetchData() {
+        let query = Post.query()
+        query?.order(byDescending: "createdAt")
+        query?.includeKeys(["author", "createdAt"])
+        query?.limit = 20
+        
+        // fetch data asynchronously
+        query?.findObjectsInBackground { (posts, error) in
+            if let posts = posts {
+                self.posts = posts
+            } else {
+                print(error?.localizedDescription ?? "Error instance was nil")
+            }
+        }
+        print("hello")
+        print(posts.count)
+        tableView.reloadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "detailSegue" {
+            let cell = sender as! PostCell
+            if let indexPath = tableView.indexPath(for: cell) {
+                let post = posts[indexPath.row]
+                let detailViewController = segue.destination as! DetailViewController
+                detailViewController.post = post
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {

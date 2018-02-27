@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let currentUser = PFUser.current() {
             print("Welcome back \(currentUser.username!) 😀")
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let feedViewController = storyboard.instantiateViewController(withIdentifier: "FeedViewController")
+            let feedViewController = storyboard.instantiateViewController(withIdentifier: "NavigationViewController")
             window?.rootViewController = feedViewController
         }
         

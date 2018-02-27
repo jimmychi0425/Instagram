@@ -4,6 +4,11 @@
 <dict>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Need library access to upload images</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Need camera access to take pictures</string>
 	<key>CFBundleDevelopmentRegion</key>
