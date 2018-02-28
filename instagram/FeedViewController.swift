@@ -13,13 +13,16 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var posts: [PFObject] = []
     @IBOutlet weak var tableView: UITableView!
-    
+    override func viewDidAppear(_ animated: Bool) {
+        fetchData()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 200
+       
         // Do any additional setup after loading the view.
         fetchData()
         
@@ -73,13 +76,13 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         query?.findObjectsInBackground { (posts, error) in
             if let posts = posts {
                 self.posts = posts
+                self.tableView.reloadData()
             } else {
                 print(error?.localizedDescription ?? "Error instance was nil")
             }
         }
         print("hello")
         print(posts.count)
-        tableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
